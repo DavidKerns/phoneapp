@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PhoneService } from './../phone.service';
+
 
 @Component({
   selector: 'app-phone-details',
@@ -12,10 +13,7 @@ import { PhoneService } from './../phone.service';
  export class PhoneDetailsComponent implements OnInit {
    phone: any;
 
-   constructor(
-     private route: ActivatedRoute,
-     private phoneService: PhoneService
-   ) { }
+   constructor(private route: ActivatedRoute, private router: Router, private phoneService: PhoneService) { }
 
    ngOnInit() {
      this.route.params.subscribe(params => {
@@ -29,4 +27,12 @@ import { PhoneService } from './../phone.service';
          this.phone = phone;
        });
    }
+   deletePhone(){
+     if(window.confirm('Are you sure?')) {
+       this.phoneService.remove(this.phone._id)
+       .subscribe(() => {
+         this.router.navigate(['']);
+       });
+   }
  }
+}

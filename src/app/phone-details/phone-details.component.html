@@ -10,10 +10,11 @@
         <h2> {{ phone.name }}</h2>
         <h3> {{ phone.brand }} </h3>
 
-        <div *ngIf="phone.specs.length">
+        <div *ngIf="phone.specs.length>0">
           <h4> Features </h4>
           <ul>
             <li *ngFor="let spec of phone.specs"> {{ spec&nbsp;}} </li>
+            <button (click)="deletePhone()"> Delete </button>
           </ul>
         </div>
       </div>
